@@ -1,9 +1,29 @@
 var http = require('http');//création d'un serveur http
+var url = require('url');
+var querystring = require ('querystring');
 
-httpServer = http.createServer(function(req, res){//Démmarer le serveur
-    res.end('Hello world!');
+
+var Server = http.createServer();
+server.on('request', function(req, res){//Démmarer le serveur
+    var urls = url.parse(req.url);
+    var page = urls.pathname;
+    var query = urls.query;
+    var params = querystring.parse(query);
+    console.log(params);
+    res.writeHead(200, {"Content-Type" : "text/html"});
+    if (page == '/') {
+        res.write(query + '<br>' + params['papa']);
+    }
+    else if (page == '/hello') {
+        res.write('Bonjour');
+    }
+    else if (page == '/hello/chambre') {
+        res.write('Bienvenue dans ma chambre !');
+    }
+    else{
+        res.write('Erreur 404');
+    }
+    res.end();
 });
 
-httpServer.listen(8080);
-
-var io = require('socket.io').listen(httpServer);
+Server.listen(8080);
