@@ -1,7 +1,7 @@
 //Application côté serveur en NodeJS
 var app = require('express')(),//On appelle les modules 'express', 'socket.io', 'ent' et 'fs'
     server = require('http').createServer(app),//Permet de communiquer avec le navigateur via le protocole http
-    io = require('socket.io').listen(server),//Permet un échange synchrone entre le client et le serveur. Permet de ne pas recharger la page.
+    io = require('socket.io').listen(server),//Permet un échange asynchrone entre le client et le serveur. Permet de ne pas recharger la page.
     ent = require('ent'), // Permet de bloquer les caractères HTML (sécurité équivalente à htmlentities en PHP)
     fs = require('fs');
 
